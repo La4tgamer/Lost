@@ -1,13 +1,24 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
-</view>
+<scroll-view class='content' >
+  <view class='user_top'>
+      <view class='user_infor'>
+         <view class='head_name'>
+            <image class='head_image' src='{{userInfo.avatarUrl}}'></image>
+         <view class='user_name'>{{userInfo.nickName}}</view>
+         </view>
+         <button class='loginAcount' open-type="getUserInfo" bindgetuserinfo="getUserInfo">登录账号</button>
+      </view>
+   </view>
+   <view class='urser_bottom'>
+      <view class='found_count'>
+         <label class='aount_numnber'>-</label>
+         <label class='attation'>我捡到的</label>
+      </view>
+      <view class='lost_count'>
+         <label class='aount_numnber'>-</label>
+         <label class='attation'>我丢失的</label>
+      </view>
+   </view>
+   
+</scroll-view>
+

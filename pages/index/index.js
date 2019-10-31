@@ -5,7 +5,10 @@ const app = getApp()
 Page({
   data: {
     motto: 'Hello World',
-    userInfo: {},
+    userInfo: {
+      avatarUrl:"/image/play.png",
+      nickName:"未登录"
+    },
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
