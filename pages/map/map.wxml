@@ -1,2 +1,16 @@
-<!--pages/map.wxml-->
-<text>pages/map.wxml</text>
+<view class="view">
+    <map longitude="{{longitude}}" latitude="{{latitude}}" markers="{{markers}}" covers="{{covers}}"  show-location>
+      <view>
+        经度：{{longitude}}
+      </view>
+      <view>
+        纬度：{{latitude}}
+      </view>
+      <view>
+        速度：{{speed}}
+      </view>
+      <view>
+        精度：{{accuracy}}
+      </view>
+    </map>
+</view>
