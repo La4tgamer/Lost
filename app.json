@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/map/map",
     "pages/logs/logs",
-    "pages/home/home"
+    "pages/myFound/myFound",
+    "pages/myLost/myLost"
   ],
   "permission": {
     "scope.userLocation": {

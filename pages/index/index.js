@@ -53,5 +53,18 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+
+  lost_jumpBtn: function(options) {
+    //跳转我丢失的界面
+    wx.navigateTo({
+      url: '../myLost/myLost',
+    })
+  },
+  found_jumpBtn: function(options) {
+    //跳转我捡到的界面
+    wx.navigateTo({
+      url: '../myFound/myFound',
+    })
   }
 })

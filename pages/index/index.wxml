@@ -10,14 +10,16 @@
       </view>
    </view>
    <view class='urser_bottom'>
-      <view class='found_count'>
+      <button id='found_btn' bindtap="found_jumpBtn" size="mini" plain='true' hidden='true'></button>
+      <label class='found_count' for='found_btn'>
          <label class='aount_numnber'>-</label>
          <label class='attation'>我捡到的</label>
-      </view>
-      <view class='lost_count'>
+      </label>
+      <button id='lost_btn' bindtap="lost_jumpBtn" size="mini" plain='true' hidden='true'></button>
+      <label class='lost_count' for='lost_btn'>
          <label class='aount_numnber'>-</label>
          <label class='attation'>我丢失的</label>
-      </view>
+      </label>
    </view>
    
 </scroll-view>
