@@ -38,9 +38,9 @@ Page({
     map.set('customerid', '0010000022464');
     let d = json_util.mapToJson(util.tokenAndKo(map));
     console.log(d);
-    var url1 = 'http://127.0.0.1:8080/test';
+    var url1 = 'http://127.0.0.1:8082/lost/returnAllObj';
 
-    network_util._post(url1, d,
+    network_util._get(url1, d,
       function (res) {
         console.log(res);
       }, function (res) {
