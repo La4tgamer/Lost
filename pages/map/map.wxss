@@ -1,14 +1,52 @@
-page {
-  height: 100%;
-}
- 
-.view {
-  width: 100%;
-  height: 100%;
+page{
+    height: 100%;
+    width: 100%;
 }
 
-map {
-  width: 100%;
-  height: 100%;
-  background-color: red;
+
+.container{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+.map {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 80%;
+    z-index: 1;
+}
+
+.start {
+    position: absolute;
+    left: 0;
+    top: 80%;
+    right: 0;
+    bottom: 0;
+    height: 10%;
+    width: 100%;
+    z-index: 2;
+}
+
+.end {
+    position: absolute;
+    left: 0;
+    top: 90%;
+    right: 0;
+    bottom: 0;
+    height: 10%;
+    width: 100%;
+    z-index: 3;
+}
+
+/* 复位按钮 */
+.location {
+    width: 120rpx;
+    height: 120rpx;
+    position: absolute;
+    bottom: 210rpx;
+    left: 20rpx;
 }

@@ -1,135 +1,147 @@
-Page({
+var point = [];
+var that2;
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
-    longitude: 116.4965075,
-    latitude: 40.006103,
-    speed: 0,
-    accuracy: 0
-  },
+function drawline() {
+    that2.setData({
+        polyline: [{
+            points: point,
+            color: '#99FF00',
+            width: 4,
+            dottedLine: false
+        }]
+    });
+}
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    // var that = this
-    // wx.showLoading({
-    //   title: "定位中",
-    //   mask: true
-    // })
-    // wx.getLocation({
-    //   type: 'gcj02',
-    //   altitude: true,//高精度定位
-    //   //定位成功，更新定位结果
-    //   success: function (res) {
-    //     var latitude = res.latitude
-    //     var longitude = res.longitude
-    //     var speed = res.speed
-    //     var accuracy = res.accuracy
-
-    //     that.setData({
-    //       longitude: longitude,
-    //       latitude: latitude,
-    //       speed: speed,
-    //       accuracy: accuracy
-    //     })
-    //   },
-    //   //定位失败回调
-    //   fail: function () {
-    //     wx.showToast({
-    //       title: "定位失败",
-    //       icon: "none"
-    //     })
-    //   },
-
-    //   complete: function () {
-    //     //隐藏定位中信息进度
-    //     wx.hideLoading()
-    //   }
-    // })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    var that = this
-    wx.showLoading({
-      title: "定位中",
-      mask: true
-    })
+//获取经纬度
+function getlocation() {
+    var lat, lng;
+    altitude: true
     wx.getLocation({
-      type: 'gcj02',
-      altitude: true,//高精度定位
-      //定位成功，更新定位结果
-      success: function (res) {
-        var latitude = res.latitude
-        var longitude = res.longitude
-        var speed = res.speed
-        var accuracy = res.accuracy
+        type: 'gcj02',
+        success: function (res) {
+            lat = res.latitude;
+            lng = res.longitude;
+            point.push({latitude: lat, longitude: lng});
+            wx.getStorage({
+                key: 'points',
+                success: function (res) {
+                    console.log(res)
+                    res.data.push({latitude: lat, longitude: lng})
+                    wx.setStorage({
+                        key: 'points',
+                        data: res.data,
+                    })
+                },
+            })
+        }
+    });
+}
+
+Page({
+    data: {
+        polyline: [],
+        day: "2019-11-4",
+        markers: [],
+        startDisable: false,
+        endDisable: true
+    },
+
+    onLoad: function () {
+        that2 = this;
+        // that2.data.startDisable = false;
+        // that2.data.endDisable = true;
+        wx.getStorage({
+            key: 'points',
+            success: function (res) {
+
+            },
+            fail: function (res) {
+                wx.setStorage({
+                    key: 'points',
+                    data: [],
+                })
+            }
+        })
+        wx.getLocation({
+            type: 'gcj02',
+            altitude: true,
+            success: function (res) {
+                that2.setData({
+                    longitude: res.longitude,
+                    latitude: res.latitude,
+                    markers: [
+                        {
+                            id: 1,
+                            latitude: res.latitude,
+                            longitude: res.longitude,
+                            iconPath: '../../image/location.png',
+                            width: 30,
+                            height: 30,
+                            callout: {
+                                content: "服务:失物招领事务所",
+                                bgColor: "#fff",
+                                padding: "5px",
+                                borderRadius: "2px",
+                                borderWidth: "1px",
+                                borderColor: "#07c160"
+                            },
+                        }
+                    ]
+                })
+            }
+        });
+    },
+
+    start: function () {
+        var that = this;
 
         that.setData({
-          longitude: longitude,
-          latitude: latitude,
-          speed: speed,
-          accuracy: accuracy
+            startDisable: true,
+            endDisable: false
         })
-      },
-      //定位失败回调
-      fail: function () {
-        wx.showToast({
-          title: "定位失败",
-          icon: "none"
+
+        wx.showModal({
+            title: '开始记录',
+            content: '记录开始啦',
         })
-      },
+        this.timer = setInterval(repeat, 1000);
 
-      complete: function () {
-        //隐藏定位中信息进度
-        wx.hideLoading()
-      }
-    })
-  },
+        function repeat() {
+            console.log('re');
+            getlocation();
+            drawline();
+        }
+    },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
+    end: function () {
+        var that = this;
 
-  },
+        that.setData({
+            startDisable: false,
+            endDisable: true
+        })
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  },
+        console.log('end');
+        clearInterval(this.timer);
+        wx.showModal({
+            title: '结束记录',
+            content: '记录结束啦',
+        })
+    },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
+    controlTap(e) {
+        var that = this;
+        wx.getLocation({
+            type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+            success: function (res) {
+                var latitude = res.latitude
+                var longitude = res.longitude
+                that.setData({
+                    latitude: latitude,//纬度
+                    longitude: longitude,//经度
+                })
+            }
+        })
+    }
 
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
-})
+});

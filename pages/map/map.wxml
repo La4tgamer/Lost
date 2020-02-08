@@ -1,16 +1,23 @@
-<view class="view">
-    <map longitude="{{longitude}}" latitude="{{latitude}}" markers="{{markers}}" covers="{{covers}}"  show-location>
-      <view>
-        经度：{{longitude}}
-      </view>
-      <view>
-        纬度：{{latitude}}
-      </view>
-      <view>
-        速度：{{speed}}
-      </view>
-      <view>
-        精度：{{accuracy}}
-      </view>
+<!--pages/weather/weather.wxml-->
+<view class = "container">
+    <map
+            class="map"
+            id="map"
+            longitude="{{longitude}}"
+            latitude="{{latitude}}"
+            scale="18"
+            polyline="{{polyline}}"
+            show-location
+            markers="{{markers}}">
+
+        <!--复位按钮-->
+        <cover-view class="location" bindtap="controlTap">
+            <cover-image style="" src="../../image/location-control.png"></cover-image>
+        </cover-view>
+
+
     </map>
+
+    <button bindtap="start" disabled="{{startDisable}}" class="start">开始</button>
+    <button bindtap="end" disabled="{{endDisable}}" class="end">结束</button>
 </view>

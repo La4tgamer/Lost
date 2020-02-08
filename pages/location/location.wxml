@@ -1,0 +1,27 @@
+<!--pages/location/location.wxml-->
+<view class = "container">
+    <map
+            class="map"
+            id="map"
+            bindcontroltap="controlTap"
+            longitude="{{longitude}}"
+            latitude="{{latitude}}"
+            scale = "18"
+            polyline="{{polyline}}"
+            show-location
+            markers="{{markers}}"
+            >
+
+        <!-- 中心点标记点 -->
+        <cover-view class="center">
+            <cover-image style="" src="../../image/center.png"></cover-image>
+        </cover-view>
+
+        <!-- 将地图中心移动到当前定位点 -->
+        <cover-view class="location" bindtap="toPosition">
+            <cover-image style="" src="../../image/location-control.png"></cover-image>
+        </cover-view>
+
+
+    </map>
+</view>
