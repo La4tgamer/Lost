@@ -19,7 +19,7 @@
             <view style="margin:5px;color:red;font-size:6px"> 来源:{{item.source}}</view>
         </view>
     </view>
-    <view class="tips1">
+    <!-- <view class="tips1">
         <view wx:if="{{hasMore}}"
               style="display: flex;flex-direction: row;align-items: center;align-self: center;justify-content: center;">
             <icon type="waiting" size="45"/>
@@ -28,5 +28,5 @@
         <view wx:else>
             <text>没有更多内容了</text>
         </view>
-    </view>
+    </view> -->
 </scroll-view>
